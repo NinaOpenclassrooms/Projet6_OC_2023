@@ -1,2 +1,5 @@
 node_modules
 images
+app.js
+# Verifier que auth.js n'est pas synchronisé
+auth.js
