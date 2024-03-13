@@ -1,5 +1,5 @@
 node_modules
 images
 app.js
-# Verifier que auth.js n'est pas synchronisé
+# Verifier que auth.js n'est pas synchronisé => ne fonctionne pas
 middleware/auth.js
