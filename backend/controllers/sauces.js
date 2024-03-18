@@ -45,9 +45,12 @@ exports.modifySauce = (req, res, next) => {
             if (sauce.userId != req.auth.userId) {
                 res.status(401).json({ message: 'Not authorized' });
             } else {
-                Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
-                    .then(() => res.status(200).json({ message: 'Sauce modifiée !' }))
-                    .catch(error => res.status(401).json({ error }));
+                const filename = sauce.imageUrl.split('/images/')[1];
+                fs.unlink(`images/${filename}`, () => {
+                    Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
+                        .then(() => res.status(200).json({ message: 'Sauce modifiée !' }))
+                        .catch(error => res.status(401).json({ error }));
+                });
             }
         })
         .catch((error) => {
@@ -59,15 +62,14 @@ exports.deleteSauce = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
         .then(sauce => {
             if (sauce.userId != req.auth.userId) {
-                res.status(401).json({ message: 'Not authorized' });
-            } else {
-                const filename = sauce.imageUrl.split('/images/')[1];
-                fs.unlink(`images/${filename}`, () => {
-                    Sauce.deleteOne({ _id: req.params.id })
-                        .then(() => { res.status(200).json({ message: 'Sauce supprimée !' }) })
-                        .catch(error => res.status(401).json({ error }));
-                });
+                return res.status(401).json({ message: 'Not authorized' });
             }
+            const filename = sauce.imageUrl.split('/images/')[1];
+            fs.unlink(`images/${filename}`, () => {
+                Sauce.deleteOne({ _id: req.params.id })
+                    .then(() => { res.status(200).json({ message: 'Sauce supprimée !' }) })
+                    .catch(error => res.status(401).json({ error }));
+            });
         })
         .catch(error => {
             res.status(500).json({ error });
@@ -89,14 +91,16 @@ exports.getAllSauces = (req, res, next) => {
 };
 
 exports.likeSauce = (req, res, next) => {
-    //Créer une variable like
-    //effacer l'ID de l'utilisateur donné automatiquement
-    //vérifier si l'id de l'utilisateur est déjà dans le tableau des likes et dislikes
-    // si oui => message
-    //si non => rajouter son id dans le bon tableau
-    // if like = 0 alors retirer son id dans le tableau likes et dans le tableau dislikes
-    // if like = 1 alors rajouter son id dans le tableau des likes
-    // if like = -1 alors rajouter son id dans le tableau des dislikes
-    //Mis à jour de l'affichage
+    const likeObject = req.body;
 
-}
+
+    Sauce.findOne({ _id: req.params.id })
+        .then((sauce) => {
+            if (userId != req.auth.userId) {
+                return res.status(401).json({ message: 'Not authorized' });
+            }
+        })
+        .catch(error => {
+            res.status(500).json({ error });
+        });
+};
