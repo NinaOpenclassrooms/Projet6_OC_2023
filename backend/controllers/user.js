@@ -3,9 +3,6 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
 
-const dotenv = require("dotenv");
-dotenv.config();
-
 const tokenKey = process.env.TOKEN_KEY;
 
 exports.signup = (req, res, next) => {

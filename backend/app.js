@@ -2,10 +2,10 @@ const express = require('express');
 
 const mongoose = require('mongoose');
 
-// const dotenv = require("dotenv");
-// dotenv.config();
+const dotenv = require("dotenv");
+dotenv.config();
 
-// const mongoUri = process.env.MONGO_URI;
+const mongoKey = process.env.MONGO_URI;
 
 const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
@@ -14,7 +14,7 @@ const path = require('path');
 
 const app = express();
 
-mongoose.connect('mongodb+srv://Nina2:h1WYyMH0zScUCePP@cluster0.sgicemt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
+mongoose.connect(mongoKey,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
