@@ -16,10 +16,10 @@ const path = require('path');
 
 const app = express();
 
-// This disables X-Download-Options headers.
+// Helmet use with desactivation of Cross-Origin-Ressource-Policy headers
 app.use(
     helmet({
-        xDownloadOptions: false,
+        crossOriginOpenerPolicy: false,
     }),
 );
 
