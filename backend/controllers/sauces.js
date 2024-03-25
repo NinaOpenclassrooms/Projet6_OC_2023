@@ -35,9 +35,6 @@ exports.getOneSauce = (req, res, next) => {
 
 exports.modifySauce = (req, res, next) => {
     const sauceObject = req.file ? {
-        // const filename = sauce.imageUrl.split('/images/')[1];
-        // fs.unlinkSync(`images/${filename}`);
-
         ...JSON.parse(req.body.sauce),
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     } : { ...req.body };
@@ -47,6 +44,10 @@ exports.modifySauce = (req, res, next) => {
         .then((sauce) => {
             if (sauce.userId != req.auth.userId) {
                 return res.status(401).json({ message: 'Not authorized' });
+            }
+            if (req.file) {
+                const filename = sauce.imageUrl.split('/images/')[1];
+                fs.unlinkSync(`images/${filename}`);
             }
             Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
                 .then(() => res.status(200).json({ message: 'Sauce modifiée !' }))
