@@ -2,6 +2,8 @@ const express = require('express');
 
 const mongoose = require('mongoose');
 
+const helmet = require('helmet');
+
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -13,6 +15,13 @@ const userRoutes = require('./routes/user');
 const path = require('path');
 
 const app = express();
+
+// This disables X-Download-Options headers.
+app.use(
+    helmet({
+        xDownloadOptions: false,
+    }),
+);
 
 mongoose.connect(mongoKey,
     {
