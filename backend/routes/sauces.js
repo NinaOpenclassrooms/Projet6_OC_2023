@@ -3,7 +3,6 @@ const router = express.Router();
 
 const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config');
-// const createSauceLimiter = require('../middleware/rate-limit-config');
 
 const saucesCtrl = require('../controllers/sauces');
 

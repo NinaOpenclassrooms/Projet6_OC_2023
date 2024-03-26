@@ -6,6 +6,7 @@ const MIME_TYPES = {
     'image/png': 'png'
 };
 
+// constante storage qui contient la fonction .diskStorage passer à multer pour lui indiquer où enregistrer les fichiers entrants
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
         callback(null, 'images');
