@@ -1,3 +1,9 @@
+# Piiquante #
+
+This is the front end and back end server for Project 6 of Openclassrooms Web Developer path.
+
+This fifth project consists of the development of a secured API for the company Piiquante.
+
 # HotTakes
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.4.
