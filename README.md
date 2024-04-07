@@ -2,7 +2,19 @@
 
 This is the front end and back end server for Project 6 of Openclassrooms Web Developer path.
 
-This fifth project consists of the development of a secured API for the company Piiquante.
+This sixth project consists of the development of a secured API for the company Piiquante.
+
+# Back end Prerequisites #
+
+You will need to have Node and npm installed locally on your machine.
+
+# Front end Installation #
+
+Clone this repo. From the "frontend" folder of the project, run npm install. 
+
+# Back end Installation #
+
+You can then run the server with nodemon server. The server should run on localhost with default port 3000.
 
 # HotTakes
 
